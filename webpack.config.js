@@ -26,7 +26,7 @@ module.exports = {
       compress: {
         warnings: false,
         //cosnoleを取り除く
-        drop_console: true
+        drop_console: false
       }
     })
   ]

@@ -40,3 +40,45 @@ require('./libs/EffectComposer.js');
 
   }
 })();
+
+(function(){
+
+  var double = function(number) {
+    return new Promise(function(resolve) {
+      resolve(number * 2);
+    });
+  };
+
+  /* 3倍にする */
+
+  var treble = function(number) {
+    return new Promise(function(resolve) {
+      resolve(number * 3);
+    });
+  };
+
+  /* 表示する */
+
+  // var dump = function(number) {
+  //   console.log(number);
+  //   return number;
+  // };
+
+  var dump = function(number) {
+    if(number > 119 ){
+      console.log(number +':120以上です!');
+    }else if(number <= 119){
+      console.log(number +':120以下です!');
+    }
+    return number;
+  };
+
+  /* 実行 */
+
+  double(10)       // 10*2 -> 20
+      .then(dump)    // コンソールに表示: 20
+      .then(treble)  // 20*3 -> 60
+      .then(dump)    // コンソールに表示: 60
+      .then(double)  // 60*2 -> 120
+      .then(dump);   // コンソールに表示: 120
+})();
