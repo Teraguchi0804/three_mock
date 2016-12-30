@@ -1,84 +1,65 @@
 window.THREE = require('three');
-require('./libs/OrbitControls.js');
-require('./libs/EffectComposer.js');
 
-(function(){
-  var scene, camera, renderer;
-  var geometry, material, mesh;
+//イニシャライズ
+function init() {
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-  init();
-  animate();
 
-  function init() {
+  var renderer = new THREE.WebGLRenderer();
+  renderer.setClearColor(new THREE.Color(0xEEEEEE));
+  renderer.setSize( window.innerWidth, window.innerHeight );
 
-    scene = new THREE.Scene();
 
-    camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 10000 );
-    camera.position.z = 1000;
+  var axes = new THREE.AxisHelper(20);
+  scene.add(axes);
 
-    geometry = new THREE.BoxGeometry( 200, 200, 200 );
-    material = new THREE.MeshBasicMaterial( { color: 0xff0000, wireframe: false } );
+  var planeGeometry = new THREE.PlaneGeometry(60,20);
+  var planeMaterial = new THREE.MeshBasicMaterial({
+    color: 0xcccccc
+  });
+  var plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
-    mesh = new THREE.Mesh( geometry, material );
-    scene.add( mesh );
+  plane.rotation.x = -0.5 * Math.PI;
+  plane.position.x = 15;
+  plane.position.y = 0;
+  plane.position.z = 0;
 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize( window.innerWidth, window.innerHeight );
+  scene.add(plane);
 
-    document.body.appendChild( renderer.domElement );
+  var cubeGeometry = new THREE.BoxGeometry(4,4,4);
+  var cubeMaterial = new THREE.MeshBasicMaterial({
+    color: 0xff0000, wireframe: true
+  });
+  var cube = new THREE.Mesh(cubeGeometry,cubeMaterial);
 
-  }
+  cube.position.x = -4;
+  cube.position.y = 3;
+  cube.position.z = 0;
 
-  function animate() {
+  scene.add(cube);
 
-    requestAnimationFrame( animate );
+  var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
+  var sphereMaterial = new THREE.MeshBasicMaterial({
+    color: 0x7777ff, wireframe: true
+  });
+  var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
 
-    mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.02;
+  sphere.position.x = 20;
+  sphere.position.y = 4;
+  sphere.position.z = 2;
 
-    renderer.render( scene, camera );
+  scene.add(sphere);
 
-  }
-})();
+  camera.position.x = -30;
+  camera.position.y = 40;
+  camera.position.z = 30;
+  camera.lookAt(scene.position);
 
-(function(){
+  document.getElementById("WebGL-output").appendChild(renderer.domElement);
 
-  var double = function(number) {
-    return new Promise(function(resolve) {
-      resolve(number * 2);
-    });
-  };
+  renderer.render(scene, camera);
 
-  /* 3倍にする */
+};
 
-  var treble = function(number) {
-    return new Promise(function(resolve) {
-      resolve(number * 3);
-    });
-  };
-
-  /* 表示する */
-
-  // var dump = function(number) {
-  //   console.log(number);
-  //   return number;
-  // };
-
-  var dump = function(number) {
-    if(number > 119 ){
-      console.log(number +':120以上です!');
-    }else if(number <= 119){
-      console.log(number +':120以下です!');
-    }
-    return number;
-  };
-
-  /* 実行 */
-
-  double(10)       // 10*2 -> 20
-      .then(dump)    // コンソールに表示: 20
-      .then(treble)  // 20*3 -> 60
-      .then(dump)    // コンソールに表示: 60
-      .then(double)  // 60*2 -> 120
-      .then(dump);   // コンソールに表示: 120
-})();
+window.onload = init;
