@@ -62,4 +62,5 @@ function init() {
 
 };
 
+//初期化実行
 window.onload = init;
