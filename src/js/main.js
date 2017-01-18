@@ -1,4 +1,5 @@
 window.THREE = require('three');
+var Stats = require('./libs/stats.js');
 
 // (function(){
 //   var sample = window.sample || {};
@@ -33,6 +34,8 @@ window.THREE = require('three');
 
     this.$window = $(window);
     this.$MainDisplay = $('#WebGL-output');
+
+
 
     //WebGL renderer
     this.renderer = new THREE.WebGLRenderer();
@@ -121,8 +124,48 @@ window.THREE = require('three');
 
     this.renderer.render(this.scene, this.camera);
 
+
+    var stats = initStats();
+
+    var renderScene = function () {
+      stats.update();
+      // rotate the cube around its axes
+      cube.rotation.x += 0.02;
+      cube.rotation.y += 0.02;
+      cube.rotation.z += 0.02;
+
+      // bounce the sphere up and down
+      step += 0.04;
+      sphere.position.x = 20 + ( 10 * (Math.cos(step)));
+      sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
+
+      // render using requestAnimationFrame
+      requestAnimationFrame(renderScene);
+      this.renderer.render(this.scene, this.camera);
+    }.bind(this);
+
+    // call the render function
+    var step = 0;
+    renderScene();
+
     // resizeイベントを発火してキャンバスサイズをリサイズ
     // this.$window.trigger('resize');
+
+    function initStats() {
+
+      var stats = new Stats();
+
+      stats.setMode(0); // 0: fps, 1: ms
+
+      // Align top-left
+      stats.domElement.style.position = 'absolute';
+      stats.domElement.style.left = '0px';
+      stats.domElement.style.top = '0px';
+
+      document.getElementById("Stats-output").appendChild(stats.domElement);
+
+      return stats;
+    }
 
   };
 
