@@ -9,6 +9,7 @@ module.exports = {
   cache: true,
   //watchモードの設定
   watch: true,
+  keepalive: true,
   module: {
     loaders: [
       {

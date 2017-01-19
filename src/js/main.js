@@ -35,8 +35,6 @@ var Stats = require('./libs/stats.js');
     this.$window = $(window);
     this.$MainDisplay = $('#WebGL-output');
 
-
-
     //WebGL renderer
     this.renderer = new THREE.WebGLRenderer();
     if (!this.renderer) {
@@ -151,6 +149,7 @@ var Stats = require('./libs/stats.js');
     // resizeイベントを発火してキャンバスサイズをリサイズ：今は使用していない
     // this.$window.trigger('resize');
 
+    //Stats表示設定
     function initStats() {
 
       var stats = new Stats();
@@ -167,7 +166,7 @@ var Stats = require('./libs/stats.js');
       return stats;
     }
   };
-
+  
 })();
 
 //初期化実行
