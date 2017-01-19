@@ -148,7 +148,7 @@ var Stats = require('./libs/stats.js');
     var step = 0;
     renderScene();
 
-    // resizeイベントを発火してキャンバスサイズをリサイズ
+    // resizeイベントを発火してキャンバスサイズをリサイズ：今は使用していない
     // this.$window.trigger('resize');
 
     function initStats() {
@@ -166,7 +166,6 @@ var Stats = require('./libs/stats.js');
 
       return stats;
     }
-
   };
 
 })();
