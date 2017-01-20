@@ -5,11 +5,6 @@ module.exports = {
   output: {
     filename: 'index.js'
   },
-  //cacheをオン
-  cache: true,
-  //watchモードの設定
-  watch: true,
-  keepalive: true,
   module: {
     loaders: [
       {
@@ -24,8 +19,7 @@ module.exports = {
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       $: "jquery"
-    })
-    ,
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false,
@@ -34,6 +28,11 @@ module.exports = {
       }
     })
   ],
-  //ソースマップ排出の設定
-  devtool: '#source-map'
+  //ソースマップの設定
+  devtool: '#source-map',
+  //cacheをオン
+  cache: true,
+  //watchモードの設定
+  watch: true,
+  keepalive: true
 };
