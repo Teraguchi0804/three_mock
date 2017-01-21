@@ -31,8 +31,8 @@ module.exports = {
   //ソースマップの設定
   devtool: '#source-map',
   //cacheをオン
-  cache: true,
+  cache: true
   //watchモードの設定
-  watch: true,
-  keepalive: true
+  // watch: true,
+  // keepalive: true
 };

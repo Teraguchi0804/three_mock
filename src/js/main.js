@@ -2,11 +2,17 @@ window.THREE = require('three');
 var Stats = require('./libs/stats.js');
 var dat　= require('dat-gui');
 
-// (function(){
-//   var sample = window.sample || {};
-//   window.sample = sample;
-//
-// })();
+(function() {
+
+  var sample = window.sample || {};
+  window.sample = sample;
+
+  //初期化実行
+  $(function() {
+    new sample.MainDisplay();
+  });
+
+})();
 
 
 (function(){
@@ -26,6 +32,9 @@ var dat　= require('dat-gui');
   s = sample.MainDisplay;
   p = s.prototype;
 
+  /**
+   * イニシャライズ
+   */
   p.init = function () {
     var self = this;
 
@@ -50,6 +59,14 @@ var dat　= require('dat-gui');
     this.camera.position.y = 40;
     this.camera.position.z = 30;
     this.camera.lookAt(this.scene.position);
+
+    // window resize
+    this.$window.on('resize', function(e) {
+      self.onResize();
+    });
+
+    // resizeイベントを発火してキャンバスサイズをリサイズ
+    this.$window.trigger('resize');
 
     //axes
     // var axes = new THREE.AxisHelper(20);
@@ -117,7 +134,7 @@ var dat　= require('dat-gui');
     // this.$MainDisplay.appendChild(this.renderer.domElement);
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
 
-    this.renderer.render(this.scene, this.camera);
+    // this.renderer.render(this.scene, this.camera);
 
 
     var stats = initStats();
@@ -158,6 +175,9 @@ var dat　= require('dat-gui');
     gui.add(controls, 'rotationSpeed', 0, 0.5);
     gui.add(controls, 'bouncingSpeed', 0, 0.5);
 
+
+
+
     var render =  function() {
       stats.update();
       // rotate the cube around its axes
@@ -181,9 +201,6 @@ var dat　= require('dat-gui');
 
 
 
-    // resizeイベントを発火してキャンバスサイズをリサイズ：今は使用していない
-    // this.$window.trigger('resize');
-
     //Stats表示設定
     function initStats() {
 
@@ -201,57 +218,53 @@ var dat　= require('dat-gui');
       return stats;
     }
 
-    var onResize = function () {
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-    }.bind(this);
 
-    // listen to the resize events
-    window.addEventListener('resize', onResize, false);
+  };
+
+  /**
+   * アニメーション開始
+   */
+  // p.start = function () {
+  //   var self = this;
+  //
+  //   var enterFrameHandler = function() {
+  //     requestAnimationFrame(enterFrameHandler);
+  //     self.update();
+  //   };
+  //
+  //   enterFrameHandler();
+  // };
+
+  /**
+   * アニメーションループ内で実行される
+   */
+  // p.update = function() {
+  //   this.renderer.render(this.scene, this.camera);
+  // };
 
 
-    // ウィンドウリサイズイベント
-    // this.$window.on('resize', function(e) {
-    //   // resizeメソッドを実行
-    //   p.resize();
-    // });
+  /**
+   * リサイズ処理
+   * @param {jQuery.Event} e - jQueryのイベントオブジェクト
+   */
+  p.onResize = function () {
+    // this.camera.aspect = window.innerWidth / window.innerHeight;
+    // this.camera.updateProjectionMatrix();
+    // this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+    this.width = this.$window.width();
+    this.height = this.$window.height();
+
+    this.camera.aspect = this.width / this.height;
+    this.camera.updateProjectionMatrix();
+
+    this.renderer.setSize(this.width, this.height);
   };
 
 
 
   // p.createDatGUIBox = function () {
-  //
-  //   var controls = new function () {
-  //     this.rotationSpeed = 0.02;
-  //     this.bouncingSpeed = 0.03;
-  //   };
-  //
-  //   var gui = new dat.GUI();
-  //   gui.add(controls, 'rotationSpeed', 0, 0.5);
-  //   gui.add(controls, 'bouncingSpeed', 0, 0.5);
-  //
-  //   var render =  function() {
-  //     stats.update();
-  //     // rotate the cube around its axes
-  //     cube.rotation.x += controls.rotationSpeed;
-  //     cube.rotation.y += controls.rotationSpeed;
-  //     cube.rotation.z += controls.rotationSpeed;
-  //
-  //     // bounce the sphere up and down
-  //     step += controls.bouncingSpeed;
-  //     sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-  //     sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
-  //
-  //     // render using requestAnimationFrame
-  //     requestAnimationFrame(render);
-  //     this.renderer.render(this.scene, this.camera);
-  //   }.bind(this);
-  //
-  //   render();
+
   // };
 
 })();
-
-//初期化実行
-window.onload = sample.MainDisplay();
