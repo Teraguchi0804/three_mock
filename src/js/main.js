@@ -144,6 +144,10 @@ var dat　= require('dat-gui');
     renderScene();
 
 
+    /**
+     * dat.gui
+     * dat.guiのコントローラーを定義
+     */
 
     var controls = new function () {
       this.rotationSpeed = 0.02;
@@ -196,10 +200,55 @@ var dat　= require('dat-gui');
 
       return stats;
     }
+
+    var onResize = function () {
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    }.bind(this);
+
+    // listen to the resize events
+    window.addEventListener('resize', onResize, false);
+
+
+    // ウィンドウリサイズイベント
+    // this.$window.on('resize', function(e) {
+    //   // resizeメソッドを実行
+    //   p.resize();
+    // });
   };
+
+
 
   // p.createDatGUIBox = function () {
   //
+  //   var controls = new function () {
+  //     this.rotationSpeed = 0.02;
+  //     this.bouncingSpeed = 0.03;
+  //   };
+  //
+  //   var gui = new dat.GUI();
+  //   gui.add(controls, 'rotationSpeed', 0, 0.5);
+  //   gui.add(controls, 'bouncingSpeed', 0, 0.5);
+  //
+  //   var render =  function() {
+  //     stats.update();
+  //     // rotate the cube around its axes
+  //     cube.rotation.x += controls.rotationSpeed;
+  //     cube.rotation.y += controls.rotationSpeed;
+  //     cube.rotation.z += controls.rotationSpeed;
+  //
+  //     // bounce the sphere up and down
+  //     step += controls.bouncingSpeed;
+  //     sphere.position.x = 20 + ( 10 * (Math.cos(step)));
+  //     sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
+  //
+  //     // render using requestAnimationFrame
+  //     requestAnimationFrame(render);
+  //     this.renderer.render(this.scene, this.camera);
+  //   }.bind(this);
+  //
+  //   render();
   // };
 
 })();
