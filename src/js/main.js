@@ -2,6 +2,8 @@ window.THREE = require('three');
 var Stats = require('./libs/stats.js');
 var dat　= require('dat-gui');
 
+require('./object/Cube.js');
+
 (function() {
 
   var sample = window.sample || {};
@@ -14,10 +16,13 @@ var dat　= require('dat-gui');
 
 })();
 
+// var cube = new Cube();
 
 (function(){
   var sample = window.sample || {};
   window.sample = sample;
+
+
 
   /**
    * メインクラス
@@ -97,22 +102,23 @@ var dat　= require('dat-gui');
     this.scene.add(plane);
 
 
-    //cubeGeometry
-    var cubeGeometry = new THREE.BoxGeometry(4,4,4);
+    // //cubeGeometry
+    // var cubeGeometry = new THREE.BoxGeometry(4,4,4);
+    //
+    // //cubeMaterial
+    // var cubeMaterial = new THREE.MeshLambertMaterial({
+    //   color: 0xff0000, wireframe: false
+    // });
+    //
+    // //cube
+    // var cube = new THREE.Mesh(cubeGeometry,cubeMaterial);
+    // cube.castShadow = true;
+    // //cubeを回転
+    // cube.position.x = -4;
+    // cube.position.y = 3;
+    // cube.position.z = 0;
 
-    //cubeMaterial
-    var cubeMaterial = new THREE.MeshLambertMaterial({
-      color: 0xff0000, wireframe: false
-    });
-
-    //cube
-    var cube = new THREE.Mesh(cubeGeometry,cubeMaterial);
-    cube.castShadow = true;
-    //cubeを回転
-    cube.position.x = -4;
-    cube.position.y = 3;
-    cube.position.z = 0;
-    this.scene.add(cube);
+    // this.scene.add(cube);
 
     //sphereGeometry
     var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
@@ -144,9 +150,9 @@ var dat　= require('dat-gui');
     renderScene = function () {
       stats.update();
       // rotate the cube around its axes
-      cube.rotation.x += 0.02;
-      cube.rotation.y += 0.02;
-      cube.rotation.z += 0.02;
+      // cube.rotation.x += 0.02;
+      // cube.rotation.y += 0.02;
+      // cube.rotation.z += 0.02;
 
       // bounce the sphere up and down
       step += 0.04;
@@ -178,9 +184,9 @@ var dat　= require('dat-gui');
     var render =  function() {
       stats.update();
       // rotate the cube around its axes
-      cube.rotation.x += controls.rotationSpeed;
-      cube.rotation.y += controls.rotationSpeed;
-      cube.rotation.z += controls.rotationSpeed;
+      // cube.rotation.x += controls.rotationSpeed;
+      // cube.rotation.y += controls.rotationSpeed;
+      // cube.rotation.z += controls.rotationSpeed;
 
       // bounce the sphere up and down
       step += controls.bouncingSpeed;
