@@ -32,6 +32,8 @@ var dat　= require('dat-gui');
   s = sample.MainDisplay;
   p = s.prototype;
 
+  var renderScene;
+
   /**
    * イニシャライズ
    */
@@ -49,6 +51,10 @@ var dat　= require('dat-gui');
     this.renderer.setClearColor(new THREE.Color(0xEEEEEE));
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     this.renderer.shadowMap.enabled = true;
+
+    // 高解像度対応
+    var pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    this.renderer.setPixelRatio(pixelRatio);
 
     //scene
     this.scene = new THREE.Scene();
@@ -131,15 +137,11 @@ var dat　= require('dat-gui');
     spotLight.castShadow = true;
     this.scene.add(spotLight);
 
-    // this.$MainDisplay.appendChild(this.renderer.domElement);
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
-
-    // this.renderer.render(this.scene, this.camera);
 
 
     var stats = initStats();
-
-    var renderScene = function () {
+    renderScene = function () {
       stats.update();
       // rotate the cube around its axes
       cube.rotation.x += 0.02;
@@ -152,8 +154,7 @@ var dat　= require('dat-gui');
       sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
 
       // render using requestAnimationFrame
-      requestAnimationFrame(renderScene);
-      this.renderer.render(this.scene, this.camera);
+      this.updateAnimation();
     }.bind(this);
 
     // call the render function
@@ -165,18 +166,14 @@ var dat　= require('dat-gui');
      * dat.gui
      * dat.guiのコントローラーを定義
      */
-
     var controls = new function () {
-      this.rotationSpeed = 0.02;
-      this.bouncingSpeed = 0.03;
+      this.rotationSpeed = 0.001;
+      this.bouncingSpeed = 0.001;
     };
 
     var gui = new dat.GUI();
-    gui.add(controls, 'rotationSpeed', 0, 0.5);
-    gui.add(controls, 'bouncingSpeed', 0, 0.5);
-
-
-
+    gui.add(controls, 'rotationSpeed', 0, 0.1);
+    gui.add(controls, 'bouncingSpeed', 0, 0.1);
 
     var render =  function() {
       stats.update();
@@ -190,36 +187,29 @@ var dat　= require('dat-gui');
       sphere.position.x = 20 + ( 10 * (Math.cos(step)));
       sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
 
-      // render using requestAnimationFrame
       requestAnimationFrame(render);
       this.renderer.render(this.scene, this.camera);
     }.bind(this);
-
     render();
 
-
-
-
-
-    //Stats表示設定
-    function initStats() {
-
-      var stats = new Stats();
-
-      stats.setMode(0); // 0: fps, 1: ms
-
-      // Align top-left
-      stats.domElement.style.position = 'absolute';
-      stats.domElement.style.left = '0px';
-      stats.domElement.style.top = '0px';
-
-      document.getElementById("Stats-output").appendChild(stats.domElement);
-
-      return stats;
-    }
-
-
   };
+
+  //Stats表示設定
+  function initStats() {
+
+    var stats = new Stats();
+
+    stats.setMode(0); // 0: fps, 1: ms
+
+    // Align top-left
+    stats.domElement.style.position = 'absolute';
+    stats.domElement.style.left = '0px';
+    stats.domElement.style.top = '0px';
+
+    document.getElementById("Stats-output").appendChild(stats.domElement);
+
+    return stats;
+  }
 
   /**
    * アニメーション開始
@@ -238,9 +228,10 @@ var dat　= require('dat-gui');
   /**
    * アニメーションループ内で実行される
    */
-  // p.update = function() {
-  //   this.renderer.render(this.scene, this.camera);
-  // };
+  p.updateAnimation = function() {
+    requestAnimationFrame(renderScene);
+    this.renderer.render(this.scene, this.camera);
+  };
 
 
   /**
@@ -248,9 +239,6 @@ var dat　= require('dat-gui');
    * @param {jQuery.Event} e - jQueryのイベントオブジェクト
    */
   p.onResize = function () {
-    // this.camera.aspect = window.innerWidth / window.innerHeight;
-    // this.camera.updateProjectionMatrix();
-    // this.renderer.setSize(window.innerWidth, window.innerHeight);
 
     this.width = this.$window.width();
     this.height = this.$window.height();
