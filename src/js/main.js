@@ -3,6 +3,7 @@ var Stats = require('./libs/stats.js');
 var dat　= require('dat-gui');
 
 require('./object/Cube.js');
+require('./object/Plane.js');
 
 (function() {
 
@@ -19,6 +20,8 @@ require('./object/Cube.js');
 //Cubeをインスタンス化
 var CubeObject = new Cube();
 
+//Planeをインスタンス化
+var PlaneObject = new Plane();
 
 
 (function(){
@@ -84,23 +87,8 @@ var CubeObject = new Cube();
     // var axes = new THREE.AxisHelper(20);
     // this.scene.add(axes);
 
-    //planeGeometry
-    var planeGeometry = new THREE.PlaneGeometry(60,20);
-
-    //planeMaterial
-    var planeMaterial = new THREE.MeshLambertMaterial({
-      color: 0xffffff
-    });
-
-    //plane
-    var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.receiveShadow = true;
-    //planeを回転
-    plane.rotation.x = -0.5 * Math.PI;
-    plane.position.x = 15;
-    plane.position.y = 0;
-    plane.position.z = 0;
-    this.scene.add(plane);
+    //Planeをシーンに追加
+    this.scene.add(PlaneObject.init());
 
     //Cubeをシーンに追加
     this.scene.add(CubeObject.init());
