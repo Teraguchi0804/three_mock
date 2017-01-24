@@ -119,6 +119,7 @@ var PlaneObject = new Plane();
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
 
 
+
     var stats = initStats();
     renderScene = function () {
       stats.update();
@@ -157,9 +158,9 @@ var PlaneObject = new Plane();
     var render =  function() {
       stats.update();
       // rotate the cube around its axes
-      // cube.rotation.x += controls.rotationSpeed;
-      // cube.rotation.y += controls.rotationSpeed;
-      // cube.rotation.z += controls.rotationSpeed;
+      // CubeObject.init().rotation.x += controls.rotationSpeed;
+      // CubeObject.init().rotation.y += controls.rotationSpeed;
+      // CubeObject.init().rotation.z += controls.rotationSpeed;
 
       // bounce the sphere up and down
       // step += controls.bouncingSpeed;
