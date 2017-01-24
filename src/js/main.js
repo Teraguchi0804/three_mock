@@ -16,14 +16,14 @@ require('./object/Cube.js');
 
 })();
 
-//??
-// var cube = new Cube();
+//Cubeをインスタンス化
+var CubeObject = new Cube();
+
+
 
 (function(){
   var sample = window.sample || {};
   window.sample = sample;
-
-
 
   /**
    * メインクラス
@@ -102,41 +102,25 @@ require('./object/Cube.js');
     plane.position.z = 0;
     this.scene.add(plane);
 
-
-    // //cubeGeometry
-    // var cubeGeometry = new THREE.BoxGeometry(4,4,4);
-    //
-    // //cubeMaterial
-    // var cubeMaterial = new THREE.MeshLambertMaterial({
-    //   color: 0xff0000, wireframe: false
-    // });
-    //
-    // //cube
-    // var cube = new THREE.Mesh(cubeGeometry,cubeMaterial);
-    // cube.castShadow = true;
-    // //cubeを回転
-    // cube.position.x = -4;
-    // cube.position.y = 3;
-    // cube.position.z = 0;
-
-    // this.scene.add(cube);
+    //Cubeをシーンに追加
+    this.scene.add(CubeObject.init());
 
     //sphereGeometry
-    var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
-
-    //sphereMaterial
-    var sphereMaterial = new THREE.MeshLambertMaterial({
-      color: 0x7777ff, wireframe: false
-    });
-
-    //sphere
-    var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
-    sphere.castShadow = true;
-    //sphereを回転
-    sphere.position.x = 20;
-    sphere.position.y = 4;
-    sphere.position.z = 2;
-    this.scene.add(sphere);
+    // var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
+    //
+    // //sphereMaterial
+    // var sphereMaterial = new THREE.MeshLambertMaterial({
+    //   color: 0x7777ff, wireframe: false
+    // });
+    //
+    // //sphere
+    // var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
+    // sphere.castShadow = true;
+    // //sphereを回転
+    // sphere.position.x = 20;
+    // sphere.position.y = 4;
+    // sphere.position.z = 2;
+    // this.scene.add(sphere);
 
 
     var spotLight = new THREE.SpotLight(0xffffff);
@@ -151,14 +135,14 @@ require('./object/Cube.js');
     renderScene = function () {
       stats.update();
       // rotate the cube around its axes
-      // cube.rotation.x += 0.02;
-      // cube.rotation.y += 0.02;
-      // cube.rotation.z += 0.02;
+      // CubeObject.init().rotation.x += 0.02;
+      // CubeObject.init().rotation.y += 0.02;
+      // CubeObject.init().rotation.z += 0.02;
 
       // bounce the sphere up and down
-      step += 0.04;
-      sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-      sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
+      // step += 0.04;
+      // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
+      // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
 
       // render using requestAnimationFrame
       this.updateAnimation();
@@ -190,9 +174,9 @@ require('./object/Cube.js');
       // cube.rotation.z += controls.rotationSpeed;
 
       // bounce the sphere up and down
-      step += controls.bouncingSpeed;
-      sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-      sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
+      // step += controls.bouncingSpeed;
+      // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
+      // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
 
       requestAnimationFrame(render);
       this.renderer.render(this.scene, this.camera);

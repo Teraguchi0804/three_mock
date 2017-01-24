@@ -1,20 +1,24 @@
-(function(){
-  var sample = window.sample || {};
-  window.sample = sample;
+window.THREE = require('three');
 
+(function(){
   /**
    * Cubeクラス
    */
-  sample.Cube = function () {
+  var Cube = window.Cube || {};
+
+  window.Cube = function () {
     //Cubeクラスをイニシャライズ
     p.init();
   };
 
   var p, s;
 
-  s = sample.Cube;
+  s = window.Cube;
   p = s.prototype;
 
+  /**
+   * Cubeクラスイニシャライズ
+   **/
   p.init = function () {
     var self = this;
 
@@ -33,7 +37,9 @@
     self.CubeObject.position.x = -4;
     self.CubeObject.position.y = 3;
     self.CubeObject.position.z = 0;
-    // this.scene.add(cube);
+
+    //オブジェクトとしてCubeObject返す
+    return self.CubeObject;
   };
 
 })();
