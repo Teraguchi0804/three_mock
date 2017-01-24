@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------------------
 var gulp = require('gulp');
 var imageMin = require('gulp-imagemin');
-var cache = require('gulp-cache');
+// var cache = require('gulp-cache');
 // var webpack = require('gulp-webpack');
 var webpack = require('webpack-stream');
 var plumber = require('gulp-plumber');

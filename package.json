@@ -43,12 +43,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://Teraguchi0804@github.com/Teraguchi0804/frontend_base.git"
+    "url": ""
   },
   "bugs": {
-    "url": "https://github.com/Teraguchi0804/frontend_base/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/Teraguchi0804/frontend_base#readme",
+  "homepage": "",
   "dependencies": {
     "jquery": "^3.1.1",
     "three": "^0.82.1"
