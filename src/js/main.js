@@ -92,23 +92,29 @@ var PlaneObject = new Plane();
 
     //Cubeをシーンに追加
     this.scene.add(CubeObject.init());
+    
+    window.console.log('Cube',CubeObject.init());
+    // window.console.log('CubeX',CubeObject.init().rotation.x);
 
     //sphereGeometry
-    // var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
-    //
-    // //sphereMaterial
-    // var sphereMaterial = new THREE.MeshLambertMaterial({
-    //   color: 0x7777ff, wireframe: false
-    // });
-    //
-    // //sphere
-    // var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
-    // sphere.castShadow = true;
-    // //sphereを回転
-    // sphere.position.x = 20;
-    // sphere.position.y = 4;
-    // sphere.position.z = 2;
-    // this.scene.add(sphere);
+    var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
+
+    //sphereMaterial
+    var sphereMaterial = new THREE.MeshLambertMaterial({
+      color: 0x7777ff, wireframe: false
+    });
+
+    //sphere
+    var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
+    sphere.castShadow = true;
+    //sphereを回転
+    sphere.position.x = 20;
+    sphere.position.y = 4;
+    sphere.position.z = 2;
+    this.scene.add(sphere);
+    
+    window.console.log('sphere',sphere);
+    window.console.log('sphereX',sphere.position.x);
 
 
     var spotLight = new THREE.SpotLight(0xffffff);
@@ -124,14 +130,14 @@ var PlaneObject = new Plane();
     renderScene = function () {
       stats.update();
       // rotate the cube around its axes
-      // CubeObject.init().rotation.x += 0.02;
-      // CubeObject.init().rotation.y += 0.02;
-      // CubeObject.init().rotation.z += 0.02;
+      CubeObject.init().rotation.x += 0.02;
+      CubeObject.init().rotation.y += 0.02;
+      CubeObject.init().rotation.z += 0.02;
 
       // bounce the sphere up and down
-      // step += 0.04;
-      // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-      // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
+      step += 0.04;
+      sphere.position.x = 20 + ( 10 * (Math.cos(step)));
+      sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
 
       // render using requestAnimationFrame
       this.updateAnimation();
@@ -157,10 +163,11 @@ var PlaneObject = new Plane();
 
     var render =  function() {
       stats.update();
+      // window.console.log('CubeX',CubeObject.init().rotation.x);
       // rotate the cube around its axes
-      // CubeObject.init().rotation.x += controls.rotationSpeed;
-      // CubeObject.init().rotation.y += controls.rotationSpeed;
-      // CubeObject.init().rotation.z += controls.rotationSpeed;
+      CubeObject.init().rotation.x += controls.rotationSpeed;
+      CubeObject.init().rotation.y += controls.rotationSpeed;
+      CubeObject.init().rotation.z += controls.rotationSpeed;
 
       // bounce the sphere up and down
       // step += controls.bouncingSpeed;
