@@ -223,7 +223,6 @@ var PlaneObject = new Plane();
 
   /**
    * リサイズ処理
-   * @param {jQuery.Event} e - jQueryのイベントオブジェクト
    */
   p.onResize = function () {
 
