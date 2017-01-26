@@ -33,23 +33,23 @@ window.THREE = require('three');
     });
 
     //cube
-    self.CubeObject = new THREE.Mesh(self.cubeGeometry,self.cubeMaterial);
-    self.CubeObject.castShadow = true;
+    var CubeObject = new THREE.Mesh(self.cubeGeometry,self.cubeMaterial);
+    CubeObject.castShadow = true;
     //CubeObjectを回転
-    self.CubeObject.position.x = -4;
-    self.CubeObject.position.y = 3;
-    self.CubeObject.position.z = 0;
+    CubeObject.position.x = -4;
+    CubeObject.position.y = 3;
+    CubeObject.position.z = 0;
 
     //オブジェクトとしてCubeObject返す
-    return self.CubeObject;
+    return CubeObject;
   };
 
   p.animate = function () {
     var self = this;
 
-    self.CubeObject.rotation.x += 0.02;
-    self.CubeObject.rotation.y += 0.02;
-    self.CubeObject.rotation.z += 0.02;
+    // self.CubeObject.rotation.x += 0.02;
+    // self.CubeObject.rotation.y += 0.02;
+    // self.CubeObject.rotation.z += 0.02;
 
   };
 
