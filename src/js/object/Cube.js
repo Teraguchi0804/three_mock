@@ -9,6 +9,8 @@ window.THREE = require('three');
   window.Cube = function () {
     //Cubeクラスをイニシャライズ
     p.init();
+
+    // p.animate();
   };
 
   var p, s;
@@ -40,6 +42,15 @@ window.THREE = require('three');
 
     //オブジェクトとしてCubeObject返す
     return self.CubeObject;
+  };
+
+  p.animate = function () {
+    var self = this;
+
+    self.CubeObject.rotation.x += 0.02;
+    self.CubeObject.rotation.y += 0.02;
+    self.CubeObject.rotation.z += 0.02;
+
   };
 
 })();

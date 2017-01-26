@@ -18,10 +18,12 @@ require('./object/Plane.js');
 })();
 
 //Cubeをインスタンス化
-var CubeObject = new Cube();
+// var CubeObject = new Cube();
 
 //Planeをインスタンス化
 var PlaneObject = new Plane();
+
+var Cube;
 
 
 (function(){
@@ -90,10 +92,28 @@ var PlaneObject = new Plane();
     //Planeをシーンに追加
     this.scene.add(PlaneObject.init());
 
+    //cubeGeometry
+    var cubeGeometry = new THREE.BoxGeometry(4,4,4);
+
+    //cubeMaterial
+    var cubeMaterial = new THREE.MeshLambertMaterial({
+      color: 0xff0000, wireframe: false
+    });
+
+    //cube
+    Cube = new THREE.Mesh(cubeGeometry,cubeMaterial);
+    Cube.castShadow = true;
+    //CubeObjectを回転
+    Cube.position.x = -4;
+    Cube.position.y = 3;
+    Cube.position.z = 0;
+
     //Cubeをシーンに追加
-    this.scene.add(CubeObject.init());
+    this.scene.add(Cube);
+    // this.scene.add(CubeObject.init());
+    // var CubeObject = CubeObject.init();
     
-    window.console.log('Cube',CubeObject.init());
+    // window.console.log('Cube',CubeObject.init());
     // window.console.log('CubeX',CubeObject.init().rotation.x);
 
     //sphereGeometry
@@ -113,8 +133,8 @@ var PlaneObject = new Plane();
     sphere.position.z = 2;
     this.scene.add(sphere);
     
-    window.console.log('sphere',sphere);
-    window.console.log('sphereX',sphere.position.x);
+    // window.console.log('sphere',sphere);
+    // window.console.log('sphereX',sphere.position.x);
 
 
     var spotLight = new THREE.SpotLight(0xffffff);
@@ -124,20 +144,24 @@ var PlaneObject = new Plane();
 
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
 
+    // var Cube = CubeObject.init();
+    // window.console.log(Cube.rotation.x);
+    // window.console.log(sphere.rotation.x);
 
 
     var stats = initStats();
     renderScene = function () {
       stats.update();
       // rotate the cube around its axes
-      CubeObject.init().rotation.x += 0.02;
-      CubeObject.init().rotation.y += 0.02;
-      CubeObject.init().rotation.z += 0.02;
+      // CubeObject.animate();
+      Cube.rotation.x += 0.02;
+      // Cube.rotation.y += 0.02;
+      // Cube.rotation.z += 0.02;
 
       // bounce the sphere up and down
-      step += 0.04;
-      sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-      sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
+      // step += 0.04;
+      // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
+      // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
 
       // render using requestAnimationFrame
       this.updateAnimation();
@@ -165,9 +189,9 @@ var PlaneObject = new Plane();
       stats.update();
       // window.console.log('CubeX',CubeObject.init().rotation.x);
       // rotate the cube around its axes
-      CubeObject.init().rotation.x += controls.rotationSpeed;
-      CubeObject.init().rotation.y += controls.rotationSpeed;
-      CubeObject.init().rotation.z += controls.rotationSpeed;
+      // CubeObject.init().rotation.x += controls.rotationSpeed;
+      // CubeObject.init().rotation.y += controls.rotationSpeed;
+      // CubeObject.init().rotation.z += controls.rotationSpeed;
 
       // bounce the sphere up and down
       // step += controls.bouncingSpeed;
@@ -201,7 +225,7 @@ var PlaneObject = new Plane();
   /**
    * アニメーション開始
    */
-  // p.start = function () {
+  // p.start = function() {
   //   var self = this;
   //
   //   var enterFrameHandler = function() {
@@ -210,7 +234,7 @@ var PlaneObject = new Plane();
   //   };
   //
   //   enterFrameHandler();
-  // };
+  // }
 
   /**
    * アニメーションループ内で実行される
