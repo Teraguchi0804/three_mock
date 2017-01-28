@@ -18,12 +18,50 @@ var Cube = (function () {
   p = s.prototype;
 
   p.init = function() {
+    this.cube;
+    this.geometry = null;
+    this.material = null;
 
+    //イニシャライズ実行
+    this.setup();
   };
 
   p.setup = function() {
     // console.log('this',this);
-    console.log('Cube_setup!!!!!');
+    // console.log('Cube_setup!!!!!');
+
+    //cubeGeometry
+    this.geometry = new THREE.BoxGeometry(4,4,4);
+
+    //cubeMaterial
+    this.material = new THREE.MeshLambertMaterial({
+      color: 0xff0000, wireframe: false
+    });
+
+    this.cube = new THREE.Mesh(this.geometry, this.material);
+    this.cube.castShadow = true;
+    //Cubeを回転
+    this.cube.position.x = -4;
+    this.cube.position.y = 3;
+    this.cube.position.z = 0;
+
+    return this.cube;
+
+  };
+
+  //
+  p.create = function () {
+
+  };
+
+  //
+  p.update = function () {
+
+  };
+
+  //
+  p.setEvents = function () {
+
   };
 
   return Cube;
@@ -32,58 +70,11 @@ var Cube = (function () {
 
 module.exports = Cube;
 
-
-(function(){
-  /**
-   * Cubeクラス
-   */
-  var Cube = window.Cube || {};
-
-  window.Cube = function () {
-    //Cubeクラスをイニシャライズ
-    p.init();
-
-    // p.animate();
-  };
-
-  var p, s;
-
-  s = window.Cube;
-  p = s.prototype;
-
-  /**
-   * Cubeクラスイニシャライズ
-   **/
-  p.init = function () {
-    var self = this;
-
-    //cubeGeometry
-    self.cubeGeometry = new THREE.BoxGeometry(4,4,4);
-
-    //cubeMaterial
-    self.cubeMaterial = new THREE.MeshLambertMaterial({
-      color: 0xff0000, wireframe: false
-    });
-
-    //cube
-    var CubeObject = new THREE.Mesh(self.cubeGeometry,self.cubeMaterial);
-    CubeObject.castShadow = true;
-    //CubeObjectを回転
-    CubeObject.position.x = -4;
-    CubeObject.position.y = 3;
-    CubeObject.position.z = 0;
-
-    //オブジェクトとしてCubeObject返す
-    return CubeObject;
-  };
-
-  p.animate = function () {
-    var self = this;
-
-    // self.CubeObject.rotation.x += 0.02;
-    // self.CubeObject.rotation.y += 0.02;
-    // self.CubeObject.rotation.z += 0.02;
-
-  };
-
-})();
+//   p.animate = function () {
+//     var self = this;
+//
+//     // self.CubeObject.rotation.x += 0.02;
+//     // self.CubeObject.rotation.y += 0.02;
+//     // self.CubeObject.rotation.z += 0.02;
+//
+//   };

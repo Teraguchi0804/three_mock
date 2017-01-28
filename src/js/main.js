@@ -2,10 +2,8 @@ window.THREE = require('three');
 var Stats = require('./libs/stats.js');
 var dat　= require('dat-gui');
 
-// require('./object/Cube.js');
+
 require('./object/Plane.js');
-
-
 
 var Cube = require('./object/Cube.js');
 
@@ -23,13 +21,10 @@ var Cube = require('./object/Cube.js');
 
 })();
 
-//Cubeをインスタンス化
-var CubeObject = new Cube();
+
 
 //Planeをインスタンス化
 var PlaneObject = new Plane();
-
-
 
 (function(){
   var sample = window.sample || {};
@@ -97,29 +92,11 @@ var PlaneObject = new Plane();
     //Planeをシーンに追加
     this.scene.add(PlaneObject.init());
 
-    //cubeGeometry
-    // var cubeGeometry = new THREE.BoxGeometry(4,4,4);
-    //
-    // //cubeMaterial
-    // var cubeMaterial = new THREE.MeshLambertMaterial({
-    //   color: 0xff0000, wireframe: false
-    // });
-    //
-    // //cube
-    // var Cube = new THREE.Mesh(cubeGeometry,cubeMaterial);
-    // Cube.castShadow = true;
-    // //CubeObjectを回転
-    // Cube.position.x = -4;
-    // Cube.position.y = 3;
-    // Cube.position.z = 0;
-    //
+    //Cubeをインスタンス化
+    var CubeObject = new Cube();
+
     // //Cubeをシーンに追加
-    // this.scene.add(Cube);
-    this.scene.add(CubeObject.init());
-    // var CubeObject = CubeObject.init();
-    
-    // window.console.log('Cube',CubeObject.init());
-    // window.console.log('CubeX',CubeObject.init().rotation.x);
+    this.scene.add(CubeObject.setup());
 
     //sphereGeometry
     var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
@@ -137,9 +114,6 @@ var PlaneObject = new Plane();
     sphere.position.y = 4;
     sphere.position.z = 2;
     this.scene.add(sphere);
-    
-    // window.console.log('sphere',sphere);
-    // window.console.log('sphereX',sphere.position.x);
 
 
     var spotLight = new THREE.SpotLight(0xffffff);
@@ -149,20 +123,12 @@ var PlaneObject = new Plane();
 
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
 
-    // var Cube = CubeObject.init();
-    // window.console.log(Cube.rotation.x);
-    // window.console.log(sphere.rotation.x);
-
-    // window.console.log('Cube',Cube);
-    window.console.log('Cube',CubeObject.init());
-    window.console.log('sphere',sphere);
-
     var stats = initStats();
     renderScene = function () {
       stats.update();
       // rotate the cube around its axes
       // CubeObject.animate();
-      CubeObject.init().rotation.x += 0.02;
+      // CubeObject.init().rotation.x += 0.02;
       // Cube.rotation.y += 0.02;
       // Cube.rotation.z += 0.02;
 
