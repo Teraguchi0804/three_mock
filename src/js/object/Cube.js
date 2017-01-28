@@ -1,5 +1,38 @@
 window.THREE = require('three');
 
+/**
+ * Cube
+ */
+
+'use strict';
+
+var Cube = (function () {
+
+  function Cube() {
+    this.init.apply(this, arguments);
+  }
+
+  var p, s;
+
+  s = Cube;
+  p = s.prototype;
+
+  p.init = function() {
+
+  };
+
+  p.setup = function() {
+    // console.log('this',this);
+    console.log('Cube_setup!!!!!');
+  };
+
+  return Cube;
+
+}());
+
+module.exports = Cube;
+
+
 (function(){
   /**
    * Cubeクラス

@@ -2,8 +2,14 @@ window.THREE = require('three');
 var Stats = require('./libs/stats.js');
 var dat　= require('dat-gui');
 
-require('./object/Cube.js');
+// require('./object/Cube.js');
 require('./object/Plane.js');
+
+
+
+var Cube = require('./object/Cube.js');
+
+'use strict';
 
 (function() {
 
