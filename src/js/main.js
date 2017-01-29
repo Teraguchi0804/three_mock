@@ -59,6 +59,8 @@ var PlaneObject = new Plane();
   p.init = function () {
     var self = this;
 
+    var stats = initStats();
+
     this.$window = $(window);
     this.$MainDisplay = $('#WebGL-output');
 
@@ -99,7 +101,7 @@ var PlaneObject = new Plane();
     var CubeObject = new Cube();
 
     // //Cubeをシーンに追加
-    this.scene.add(CubeObject.setup());
+    // this.scene.add(CubeObject.setup());
 
     //sphereGeometry
     var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
@@ -116,7 +118,7 @@ var PlaneObject = new Plane();
     sphere.position.x = 20;
     sphere.position.y = 4;
     sphere.position.z = 2;
-    this.scene.add(sphere);
+    // this.scene.add(sphere);
 
 
     var spotLight = new THREE.SpotLight(0xffffff);
@@ -126,7 +128,7 @@ var PlaneObject = new Plane();
 
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
 
-    var stats = initStats();
+
     renderScene = function () {
       stats.update();
       // rotate the cube around its axes
