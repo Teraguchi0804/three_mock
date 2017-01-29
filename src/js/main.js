@@ -5,11 +5,19 @@ var dat　= require('dat-gui');
 
 require('./object/Plane.js');
 
+var Scene = require('./object/Scene.js');
+var Camera = require('./object/Camera.js');
+
 var Cube = require('./object/Cube.js');
+
 
 'use strict';
 
 (function() {
+
+  // globalオブジェクト
+  if (window.gb === undefined) window.gb = {};
+  window.gb.in = {}; //instance
 
   var sample = window.sample || {};
   window.sample = sample;
@@ -55,7 +63,7 @@ var PlaneObject = new Plane();
     this.$MainDisplay = $('#WebGL-output');
 
     //WebGL renderer
-    this.renderer = new THREE.WebGLRenderer();
+    gb.in.renderer = this.renderer = new THREE.WebGLRenderer({antialias: true});
     if (!this.renderer) {
       alert('Three.jsの初期化に失敗しました。');
     }
@@ -68,14 +76,12 @@ var PlaneObject = new Plane();
     this.renderer.setPixelRatio(pixelRatio);
 
     //scene
-    this.scene = new THREE.Scene();
+    gb.in.scene = new Scene();
+    this.scene = gb.in.scene.scene;
 
     //camera
-    this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-    this.camera.position.x = -30;
-    this.camera.position.y = 40;
-    this.camera.position.z = 30;
-    this.camera.lookAt(this.scene.position);
+    gb.in.camera = new Camera();
+    this.camera = gb.in.camera.camera;
 
     // window resize
     this.$window.on('resize', function(e) {
@@ -85,9 +91,6 @@ var PlaneObject = new Plane();
     // resizeイベントを発火してキャンバスサイズをリサイズ
     this.$window.trigger('resize');
 
-    //axes
-    // var axes = new THREE.AxisHelper(20);
-    // this.scene.add(axes);
 
     //Planeをシーンに追加
     this.scene.add(PlaneObject.init());
@@ -127,8 +130,8 @@ var PlaneObject = new Plane();
     renderScene = function () {
       stats.update();
       // rotate the cube around its axes
-      // CubeObject.animate();
       // CubeObject.init().rotation.x += 0.02;
+      CubeObject.setup().rotation.x += 0.02;
       // Cube.rotation.y += 0.02;
       // Cube.rotation.z += 0.02;
 
@@ -138,7 +141,9 @@ var PlaneObject = new Plane();
       // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
 
       // render using requestAnimationFrame
-      this.updateAnimation();
+      requestAnimationFrame(renderScene);
+      this.renderer.render(this.scene, this.camera);
+      // this.updateAnimation();
     }.bind(this);
 
     // call the render function
@@ -182,7 +187,7 @@ var PlaneObject = new Plane();
   //Stats表示設定
   function initStats() {
 
-    var stats = new Stats();
+    var stats = gb.in.stats = new Stats();
 
     stats.setMode(0); // 0: fps, 1: ms
 

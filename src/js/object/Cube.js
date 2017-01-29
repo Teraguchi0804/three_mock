@@ -1,9 +1,9 @@
 window.THREE = require('three');
+var Stats = require('../libs/stats.js');
 
 /**
  * Cube
  */
-
 'use strict';
 
 var Cube = (function () {
@@ -24,6 +24,8 @@ var Cube = (function () {
 
     //イニシャライズ実行
     this.setup();
+
+    // this.update();
   };
 
   p.setup = function() {
@@ -45,6 +47,12 @@ var Cube = (function () {
     this.cube.position.y = 3;
     this.cube.position.z = 0;
 
+    this.cube.rotation.x += 0.02;
+    this.cube.rotation.y += 0.02;
+    this.cube.rotation.z += 0.02;
+
+    this.update();
+
     return this.cube;
 
   };
@@ -56,7 +64,13 @@ var Cube = (function () {
 
   //
   p.update = function () {
+    // gb.in.stats.update();
+    // this.cube.rotation.x += 0.02;
+    // this.cube.rotation.y += 0.02;
+    // this.cube.rotation.z += 0.02;
 
+    requestAnimationFrame(p.update);
+    gb.in.renderer.render(gb.in.scene.scene, gb.in.camera.camera);
   };
 
   //
