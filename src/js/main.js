@@ -2,14 +2,14 @@ window.THREE = require('three');
 var Stats = require('./libs/stats.js');
 var dat　= require('dat-gui');
 
-
 require('./object/Plane.js');
+// require('./libs/ParametricGeometries.js');
+// require('./libs/ConvexGeometry.js');
 
 var Scene = require('./object/Scene.js');
 var Camera = require('./object/Camera.js');
 
 var Cube = require('./object/Cube.js');
-
 
 'use strict';
 
@@ -64,6 +64,8 @@ var PlaneObject = new Plane();
     this.$window = $(window);
     this.$MainDisplay = $('#WebGL-output');
 
+    this.timer += 0.01;
+
     //WebGL renderer
     gb.in.renderer = this.renderer = new THREE.WebGLRenderer({antialias: true});
     if (!this.renderer) {
@@ -85,6 +87,16 @@ var PlaneObject = new Plane();
     gb.in.camera = new Camera();
     this.camera = gb.in.camera.camera;
 
+    // add subtle ambient lighting
+    var ambientLight = new THREE.AmbientLight(0x090909);
+    this.scene.add(ambientLight);
+
+    // add spotlight for the shadows
+    var spotLight = new THREE.SpotLight(0xffffff);
+    spotLight.position.set(-25, 25, 32);
+    spotLight.castShadow = true;
+    this.scene.add(spotLight);
+
     // window resize
     this.$window.on('resize', function(e) {
       self.onResize();
@@ -98,10 +110,12 @@ var PlaneObject = new Plane();
     this.scene.add(PlaneObject.init());
 
     //Cubeをインスタンス化
-    var CubeObject = new Cube();
+    gb.in.CubeObject = new Cube();
+    this.CubeObject = gb.in.CubeObject;
 
     // //Cubeをシーンに追加
     // this.scene.add(CubeObject.setup());
+    this.scene.add(this.CubeObject.setup());
 
     //sphereGeometry
     var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
@@ -121,19 +135,23 @@ var PlaneObject = new Plane();
     // this.scene.add(sphere);
 
 
-    var spotLight = new THREE.SpotLight(0xffffff);
-    spotLight.position.set(-20, 30, -5);
-    spotLight.castShadow = true;
-    this.scene.add(spotLight);
-
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
 
 
     renderScene = function () {
       stats.update();
+      step += 0.01;
+      this.camera.position.x = Math.cos(step) * 200;
+      this.camera.position.y = Math.sin(step*2) * 90;
+      this.camera.position.z = Math.sin(step) * 90 + 200;
+
+      this.lookat_x = Math.sin(step*0.4)*50;
+      this.lookat_y = Math.cos(step*1.4)*50;
+      this.camera.lookAt(new THREE.Vector3(this.lookat_x, this.lookat_y, 0));
+
       // rotate the cube around its axes
       // CubeObject.init().rotation.x += 0.02;
-      CubeObject.setup().rotation.x += 0.02;
+      // CubeObject.setup().rotation.x += 0.02;
       // Cube.rotation.y += 0.02;
       // Cube.rotation.z += 0.02;
 
@@ -153,6 +171,7 @@ var PlaneObject = new Plane();
     renderScene();
 
 
+
     /**
      * dat.gui
      * dat.guiのコントローラーを定義
@@ -168,6 +187,10 @@ var PlaneObject = new Plane();
 
     var render =  function() {
       stats.update();
+
+
+
+
       // window.console.log('CubeX',CubeObject.init().rotation.x);
       // rotate the cube around its axes
       // CubeObject.init().rotation.x += controls.rotationSpeed;

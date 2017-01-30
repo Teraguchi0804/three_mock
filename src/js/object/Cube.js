@@ -7,6 +7,10 @@ var Stats = require('../libs/stats.js');
 'use strict';
 
 var Cube = (function () {
+  // globalオブジェクト
+  if (window.gb === undefined) window.gb = {};
+  window.gb.in = {}; //instance
+
 
   function Cube() {
     this.init.apply(this, arguments);
@@ -33,7 +37,7 @@ var Cube = (function () {
     // console.log('Cube_setup!!!!!');
 
     //cubeGeometry
-    this.geometry = new THREE.BoxGeometry(4,4,4);
+    this.geometry = new THREE.BoxGeometry(10,10,10);
 
     //cubeMaterial
     this.material = new THREE.MeshLambertMaterial({
@@ -79,6 +83,9 @@ var Cube = (function () {
   };
 
   return Cube;
+
+  //グローバルオブジェクト化
+  // gb.Cube = Cube;
 
 }());
 
