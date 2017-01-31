@@ -22,14 +22,14 @@ var Cube = (function () {
   p = s.prototype;
 
   p.init = function() {
-    this.cube;
+    this.cube = null;
     this.geometry = null;
     this.material = null;
 
     //イニシャライズ実行
     this.setup();
 
-    // this.update();
+    this.update();
   };
 
   p.setup = function() {
@@ -51,11 +51,9 @@ var Cube = (function () {
     this.cube.position.y = 3;
     this.cube.position.z = 0;
 
-    this.cube.rotation.x += 0.02;
-    this.cube.rotation.y += 0.02;
-    this.cube.rotation.z += 0.02;
-
-    this.update();
+    // this.cube.rotation.x += 0.02;
+    // this.cube.rotation.y += 0.02;
+    // this.cube.rotation.z += 0.02;
 
     return this.cube;
 
@@ -68,13 +66,13 @@ var Cube = (function () {
 
   //
   p.update = function () {
-    // gb.in.stats.update();
-    // this.cube.rotation.x += 0.02;
-    // this.cube.rotation.y += 0.02;
-    // this.cube.rotation.z += 0.02;
 
-    requestAnimationFrame(p.update);
-    gb.in.renderer.render(gb.in.scene.scene, gb.in.camera.camera);
+    // this.CubeObject.cube.rotation.x += 0.02;
+    // this.cube.rotation.x += 0.02;
+    //
+    // gb.in.renderer.render(gb.in.scene.scene, gb.in.camera.camera);
+    // requestAnimationFrame(p.update);
+
   };
 
   //

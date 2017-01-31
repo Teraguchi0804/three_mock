@@ -111,11 +111,11 @@ var PlaneObject = new Plane();
 
     //Cubeをインスタンス化
     gb.in.CubeObject = new Cube();
-    this.CubeObject = gb.in.CubeObject;
+    this.CubeObject = gb.in.CubeObject.cube;
+    // window.console.log(this.CubeObject);
 
     // //Cubeをシーンに追加
-    // this.scene.add(CubeObject.setup());
-    this.scene.add(this.CubeObject.setup());
+    this.scene.add(this.CubeObject);
 
     //sphereGeometry
     var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
@@ -137,23 +137,27 @@ var PlaneObject = new Plane();
 
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
 
+    // window.console.log(this.CubeObject.setup());
 
     renderScene = function () {
       stats.update();
+
+      // rotate the cube around its axes
+      this.CubeObject.rotation.x += 0.02;
+      this.CubeObject.rotation.y += 0.02;
+      this.CubeObject.rotation.z += 0.02;
+
       step += 0.01;
-      this.camera.position.x = Math.cos(step) * 200;
-      this.camera.position.y = Math.sin(step*2) * 90;
-      this.camera.position.z = Math.sin(step) * 90 + 200;
+      this.camera.position.z += (this.CubeObject.position.z+100 - this.camera.position.z)*0.1;
+      this.camera.position.y += (this.CubeObject.position.y+50 - this.camera.position.y)*0.1;
+      // this.camera.position.x = Math.cos(step) * 200;
+      // this.camera.position.y = Math.sin(step*2) * 90;
+      // this.camera.position.z = Math.sin(step) * 90 + 200;
 
       this.lookat_x = Math.sin(step*0.4)*50;
       this.lookat_y = Math.cos(step*1.4)*50;
       this.camera.lookAt(new THREE.Vector3(this.lookat_x, this.lookat_y, 0));
 
-      // rotate the cube around its axes
-      // CubeObject.init().rotation.x += 0.02;
-      // CubeObject.setup().rotation.x += 0.02;
-      // Cube.rotation.y += 0.02;
-      // Cube.rotation.z += 0.02;
 
       // bounce the sphere up and down
       // step += 0.04;
@@ -185,27 +189,27 @@ var PlaneObject = new Plane();
     gui.add(controls, 'rotationSpeed', 0, 0.1);
     gui.add(controls, 'bouncingSpeed', 0, 0.1);
 
-    var render =  function() {
-      stats.update();
-
-
-
-
-      // window.console.log('CubeX',CubeObject.init().rotation.x);
-      // rotate the cube around its axes
-      // CubeObject.init().rotation.x += controls.rotationSpeed;
-      // CubeObject.init().rotation.y += controls.rotationSpeed;
-      // CubeObject.init().rotation.z += controls.rotationSpeed;
-
-      // bounce the sphere up and down
-      // step += controls.bouncingSpeed;
-      // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-      // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
-
-      requestAnimationFrame(render);
-      this.renderer.render(this.scene, this.camera);
-    }.bind(this);
-    render();
+    // var render =  function() {
+    //   stats.update();
+    //
+    //
+    //
+    //
+    //   // window.console.log('CubeX',CubeObject.init().rotation.x);
+    //   // rotate the cube around its axes
+    //   // CubeObject.init().rotation.x += controls.rotationSpeed;
+    //   // CubeObject.init().rotation.y += controls.rotationSpeed;
+    //   // CubeObject.init().rotation.z += controls.rotationSpeed;
+    //
+    //   // bounce the sphere up and down
+    //   // step += controls.bouncingSpeed;
+    //   // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
+    //   // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
+    //
+    //   requestAnimationFrame(render);
+    //   this.renderer.render(this.scene, this.camera);
+    // }.bind(this);
+    // render();
 
   };
 
