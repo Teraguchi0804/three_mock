@@ -33,7 +33,6 @@ var Cube = (function () {
   };
 
   p.setup = function() {
-    // console.log('this',this);
     // console.log('Cube_setup!!!!!');
 
     //cubeGeometry
@@ -50,10 +49,6 @@ var Cube = (function () {
     this.cube.position.x = -4;
     this.cube.position.y = 3;
     this.cube.position.z = 0;
-
-    // this.cube.rotation.x += 0.02;
-    // this.cube.rotation.y += 0.02;
-    // this.cube.rotation.z += 0.02;
 
     return this.cube;
 
