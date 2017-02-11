@@ -62,12 +62,6 @@ var Cube = (function () {
   //
   p.update = function () {
 
-    // this.CubeObject.cube.rotation.x += 0.02;
-    // this.cube.rotation.x += 0.02;
-    //
-    // gb.in.renderer.render(gb.in.scene.scene, gb.in.camera.camera);
-    // requestAnimationFrame(p.update);
-
   };
 
   //
