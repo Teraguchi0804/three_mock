@@ -33,6 +33,7 @@ window.THREE = require('three');
     //plane
     self.PlaneObject = new THREE.Mesh(self.planeGeometry, self.planeMaterial);
     self.PlaneObject.receiveShadow = true;
+
     //planeを回転
     self.PlaneObject.rotation.x = -0.5 * Math.PI;
     self.PlaneObject.position.x = 0;
