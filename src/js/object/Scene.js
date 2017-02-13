@@ -26,9 +26,6 @@ var Scene = (function () {
 
   p.setup = function() {
 
-    // console.log('this',this);
-    // console.log('Scene_setup!!!!!');
-
   };
 
   //
