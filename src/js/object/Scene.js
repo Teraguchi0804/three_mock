@@ -2,7 +2,7 @@ window.THREE = require('three');
 
 /**
  * Scene
- */
+ **/
 
 'use strict';
 
@@ -17,6 +17,9 @@ var Scene = (function () {
   s = Scene;
   p = s.prototype;
 
+	/**
+	 * Sceneクラスイニシャライズ
+	 **/
   p.init = function() {
     this.scene;
 
