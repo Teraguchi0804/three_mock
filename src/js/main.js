@@ -157,13 +157,7 @@ var PlaneObject = new Plane();
       this.lookat_x = Math.sin(step*0.4)*50;
       this.lookat_y = Math.cos(step*1.4)*50;
       this.camera.lookAt(new THREE.Vector3(this.lookat_x, this.lookat_y, 0));
-
-
-      // bounce the sphere up and down
-      // step += 0.04;
-      // sphere.position.x = 20 + ( 10 * (Math.cos(step)));
-      // sphere.position.y = 2 + ( 10 * Math.abs(Math.sin(step)));
-
+      
       // render using requestAnimationFrame
       requestAnimationFrame(renderScene);
       this.renderer.render(this.scene, this.camera);
