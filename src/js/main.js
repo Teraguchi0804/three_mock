@@ -116,28 +116,8 @@ var PlaneObject = new Plane();
 
     // //Cubeをシーンに追加
     this.scene.add(this.CubeObject);
-
-    //sphereGeometry
-    var sphereGeometry = new THREE.SphereGeometry(4, 20,20);
-
-    //sphereMaterial
-    var sphereMaterial = new THREE.MeshLambertMaterial({
-      color: 0x7777ff, wireframe: false
-    });
-
-    //sphere
-    var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
-    sphere.castShadow = true;
-    //sphereを回転
-    sphere.position.x = 20;
-    sphere.position.y = 4;
-    sphere.position.z = 2;
-    // this.scene.add(sphere);
-
-
+    
     document.getElementById("WebGL-output").appendChild(this.renderer.domElement);
-
-    // window.console.log(this.CubeObject.setup());
 
     renderScene = function () {
       stats.update();
