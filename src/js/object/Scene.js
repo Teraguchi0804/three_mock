@@ -1,7 +1,7 @@
 window.THREE = require('three');
 
 /**
- * Scene
+ * Sceneクラス
  **/
 
 'use strict';
